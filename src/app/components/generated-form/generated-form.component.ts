@@ -33,12 +33,10 @@ export class GeneratedFormComponent implements OnInit {
       this.formFieldsData.push({ name: key, type: fieldData.type, options: fieldData.options });
     }
 
-    console.log(this.formFieldsData)
-
     this.formGroup = new FormGroup(formFields);
   }
 
   sendFormData() {
-    //this.apiService.sendForm();
+    this.apiService.sendForm(this.formGroup.value);
   }
 }
