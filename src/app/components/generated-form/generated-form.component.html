@@ -1,0 +1,22 @@
+<form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="sendFormData()">
+    <div *ngFor="let fieldData of formFieldsData">
+        <label [for]="fieldData.name">{{ fieldData.name }}</label>
+
+        <ng-template *ngIf="fieldData.type != 'select'; then inputField else selectField"></ng-template>
+
+        <ng-template #inputField>
+            <input [formControlName]="fieldData.name">
+        </ng-template>
+
+        <ng-template #selectField>
+            <select [formControlName]="fieldData.name">
+                <option *ngFor="let option of fieldData.options" [value]="option">{{ option }}</option>
+            </select>
+        </ng-template>
+
+        <br>
+        <br>
+    </div>
+
+    <button type="submit" [disabled]="!formGroup.valid">Submit</button>
+</form>
